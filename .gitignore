@@ -1,0 +1,14 @@
+# Python and Jupyter Notebook
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+.venv/
+env/
+venv/
+
+# OS/IDE specific
+.DS_Store
+.vscode/
+.idea/
