@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # preprocessed data
-dataset = pd.read_csv("task2/Salary_Data.csv")
+dataset = pd.read_csv("task2-simple-liner-regression/Salary_Data.csv")
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values
 
@@ -43,6 +43,7 @@ plt.ylabel("Salary")
 plt.show()
 
 
+# Special Edition
 ############# Predicting a new result with Simple Linear Regression #############
 years_of_experience = np.array([[12]])
 predicted_salary = regressor.predict(years_of_experience)
