@@ -8,7 +8,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
 
-dataset = pd.read_csv("task3-multiple_linear_regression/50_Startups.csv")
+dataset = pd.read_csv("regression/task3-multiple_linear_regression/50_Startups.csv")
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values
 # print(X)

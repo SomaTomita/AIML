@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Preprocessed data
-dataset = pd.read_csv("task5-support_vector_regression/svr.csv")
+dataset = pd.read_csv("regression/task5-support_vector_regression/svr.csv")
 X = dataset.iloc[:, 1:-1].values
 y = dataset.iloc[:, -1].values
 # print(X)

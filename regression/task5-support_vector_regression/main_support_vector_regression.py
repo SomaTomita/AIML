@@ -3,7 +3,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Preprocessed data
-dataset = pd.read_csv("task5-support_vector_regression/Position_Salaries.csv")
+dataset = pd.read_csv(
+    "regression/task5-support_vector_regression/Position_Salaries.csv"
+)
 X = dataset.iloc[:, 1:-1].values
 # 1:-1 → Select the second row (Level) to the last to the first row (before Salary)
 y = dataset.iloc[:, -1].values

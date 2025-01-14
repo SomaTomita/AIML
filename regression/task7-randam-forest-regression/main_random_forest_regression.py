@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-dataset = pd.read_csv("task7-randam-forest-regression/Position_Salaries.csv")
+dataset = pd.read_csv("regression/task7-randam-forest-regression/Position_Salaries.csv")
 X = dataset.iloc[:, 1:-1].values
 y = dataset.iloc[:, -1].values
 

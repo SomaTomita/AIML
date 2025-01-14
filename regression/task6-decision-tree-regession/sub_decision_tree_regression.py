@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-dataset = pd.read_csv("task6-decision-tree-regession/batters.csv")
+dataset = pd.read_csv("regression/task6-decision-tree-regession/batters.csv")
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values
 

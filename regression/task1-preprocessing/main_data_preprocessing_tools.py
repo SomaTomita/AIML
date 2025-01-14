@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 ############# 1. Importing the dataset #############
-dataset = pd.read_csv("task1-preprocessing/Data.csv")
+dataset = pd.read_csv("regression/task1-preprocessing/Data.csv")
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values
 # print(X)

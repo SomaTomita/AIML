@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # preprocessed data
-dataset = pd.read_csv("task2-simple-liner-regression/Salary_Data.csv")
+dataset = pd.read_csv("regression/task2-simple-liner-regression/Salary_Data.csv")
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values
 
