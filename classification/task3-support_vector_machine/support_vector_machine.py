@@ -1,10 +1,12 @@
-# K-Nearest Neighbors (K-NN)
+# Support Vector Machine (SVM)
 
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-dataset = pd.read_csv("classification/task2-k_nearest_neighbors/Social_Network_Ads.csv")
+dataset = pd.read_csv(
+    "classification/task3-support_vector_machine/Social_Network_Ads.csv"
+)
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values
 
@@ -27,10 +29,10 @@ X_test = sc.transform(X_test)
 # print(X_test)
 
 
-#############  Training the K-NN model on the Training set #############
-from sklearn.neighbors import KNeighborsClassifier
+############# Training the SVM model on the Training set #############
+from sklearn.svm import SVC
 
-classifier = KNeighborsClassifier(n_neighbors=5, metric="minkowski", p=2)
+classifier = SVC(kernel="linear", random_state=0)
 classifier.fit(X_train, y_train)
 
 # Predicting a new result
@@ -49,13 +51,14 @@ cm = confusion_matrix(y_test, y_pred)
 # print(cm)
 accuracy_score(y_test, y_pred)
 
-# Visualising the Training set results
+
+############# Visualising the Training set results #############
 from matplotlib.colors import ListedColormap
 
 X_set, y_set = sc.inverse_transform(X_train), y_train
 X1, X2 = np.meshgrid(
-    np.arange(start=X_set[:, 0].min() - 10, stop=X_set[:, 0].max() + 10, step=1),
-    np.arange(start=X_set[:, 1].min() - 1000, stop=X_set[:, 1].max() + 1000, step=1),
+    np.arange(start=X_set[:, 0].min() - 10, stop=X_set[:, 0].max() + 10, step=0.25),
+    np.arange(start=X_set[:, 1].min() - 1000, stop=X_set[:, 1].max() + 1000, step=0.25),
 )
 plt.contourf(
     X1,
@@ -72,10 +75,10 @@ for i, j in enumerate(np.unique(y_set)):
     plt.scatter(
         X_set[y_set == j, 0],
         X_set[y_set == j, 1],
-        color=ListedColormap(("red", "green"))(i),
+        c=ListedColormap(("red", "green"))(i),
         label=j,
     )
-plt.title("K-NN (Training set)")
+plt.title("SVM (Training set)")
 plt.xlabel("Age")
 plt.ylabel("Estimated Salary")
 plt.legend()
@@ -86,8 +89,8 @@ from matplotlib.colors import ListedColormap
 
 X_set, y_set = sc.inverse_transform(X_test), y_test
 X1, X2 = np.meshgrid(
-    np.arange(start=X_set[:, 0].min() - 10, stop=X_set[:, 0].max() + 10, step=1),
-    np.arange(start=X_set[:, 1].min() - 1000, stop=X_set[:, 1].max() + 1000, step=1),
+    np.arange(start=X_set[:, 0].min() - 10, stop=X_set[:, 0].max() + 10, step=0.25),
+    np.arange(start=X_set[:, 1].min() - 1000, stop=X_set[:, 1].max() + 1000, step=0.25),
 )
 plt.contourf(
     X1,
@@ -104,10 +107,10 @@ for i, j in enumerate(np.unique(y_set)):
     plt.scatter(
         X_set[y_set == j, 0],
         X_set[y_set == j, 1],
-        color=ListedColormap(("red", "green"))(i),
+        c=ListedColormap(("red", "green"))(i),
         label=j,
     )
-plt.title("K-NN (Test set)")
+plt.title("SVM (Test set)")
 plt.xlabel("Age")
 plt.ylabel("Estimated Salary")
 plt.legend()
