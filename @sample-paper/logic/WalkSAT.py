@@ -1,5 +1,4 @@
 ############# Question #############
-
 # Consider the following four sentences in propositional logic.
 # 1. A∨B
 # 2. A∨¬B∨C
@@ -22,51 +21,42 @@
 
 
 ############# Answer #############
-# A = false, B = false, C = false
-# A = true, B = false, C = false
-# A = false, B = true, C = false
-# A = false, B = false, C = true
+# Possible Assignments After One Step
+# (Starting from A = false, B = false, C = false)
+
+# 1) A = true, B = false, C = false
+# 2) A = false, B = true, C = false
+
+# Explanation of WalkSAT Steps
+
+# 1. Identify Unsatisfied Clauses
+#    Initial Assignment: A = false, B = false, C = false
+#    Evaluate each clause:
+#      Clause 1: A ∨ B
+#        false ∨ false → false   (unsatisfied)
+#      Clause 2: A ∨ ¬B ∨ C
+#        false ∨ true ∨ false → true  (satisfied)
+#      Clause 3: ¬A ∨ B
+#        true ∨ false → true          (satisfied)
+#      Clause 4: ¬A ∨ ¬B ∨ C
+#        true ∨ true ∨ false → true   (satisfied)
+#    => Only Clause 1 (A ∨ B) is unsatisfied.
+
+# 2. Random Walk vs. Greedy Flip
+#    - With probability p = 0.5, pick a random variable from the unsatisfied clause (A ∨ B) and flip it.
+#    - With probability 1 − p = 0.5, pick the variable in the clause whose flip satisfies the most clauses.
+#      (In this case, flipping either A or B leads to Clause 1 becoming satisfied, so either is valid.)
+
+# 3. Possible Outcomes
+#    - Flip A: A becomes true, so new assignment is (A = true, B = false, C = false).
+#    - Flip B: B becomes true, so new assignment is (A = false, B = true, C = false).
+
+# Note:
+# Flipping C is NOT an option in the first step because C is not part of the unsatisfied clause.
+# Therefore, (A = false, B = false, C = true) cannot be reached in this single step.
 
 
-# The WalkSAT algorithm works by:
-# Selecting an unsatisfied clause at random.
-# With probability p, flipping the value of a randomly chosen variable in that clause (random walk move).
-# With probability 1−p, flipping the variable that maximizes the number of satisfied clauses.
-
-
-# Given:
-# Initial assignment: A = false, B = false, C = false
-# Probability p = 0.5
-
-# Step-by-step Analysis:
-
-# Initial Assignment:
-# Evaluate the truth of each clause:
-# Clause 1: A ∨ B
-#   false ∨ false → false (unsatisfied)
-# Clause 2: A ∨ ¬B ∨ C
-#   false ∨ true ∨ false → true (satisfied)
-# Clause 3: ¬A ∨ B
-#   true ∨ false → true (satisfied)
-# Clause 4: ¬A ∨ ¬B ∨ C
-#   true ∨ true ∨ false → true (satisfied)
-
-# → Clause 1 is the only unsatisfied clause: A ∨ B.
-
-# Possible Actions:
-# Since A ∨ B is unsatisfied, WalkSAT will:
-# 1. Choose A or B (the variables in the unsatisfied clause) randomly.
-# 2. Flip the chosen variable's truth value.
-# If A is flipped:
-# A = true, B = false, C = false
-# If B is flipped:
-# A = false, B = true, C = false
-# Random Walk Move:
-# With probability p = 0.5, any variable in any unsatisfied clause may be flipped randomly.
-# This means:
-# C could also be flipped to true.
-
-
+# ---------------------------------------------------------
 ############# Python Code : WalkSAT algorithm #############
 import random
 
@@ -147,3 +137,162 @@ if __name__ == "__main__":
     print("Possible assignments after one step of WalkSAT:")
     for assignment in sorted(reached_assignments):
         print(dict(assignment))
+
+
+# Pros and Cons
+# 	Pros:
+# 	•	The algorithm efficiently focuses on unsatisfied clauses, ensuring progress toward satisfying more clauses.
+# 	•	The random-walk component helps avoid getting stuck in local maxima.
+# 	Cons:
+# 	•	There is still a chance of repeatedly flipping variables in unsatisfied clauses without reaching a globally optimal solution.
+# 	•	Probability tuning (value of p) can be tricky and heavily influences the performance.
+# ---------------------------------------------------------
+
+
+############# Question2 #############
+# Given the same four clauses:
+# 1. A ∨ B
+# 2. A ∨ ¬B ∨ C
+# 3. ¬A ∨ B
+# 4. ¬A ∨ ¬B ∨ C
+
+# Which assignments of (A, B, C) satisfy all four clauses?
+# Select all that apply from the eight possible assignments:
+
+# 1) A = false, B = false, C = false
+# 2) A = false, B = false, C = true
+# 3) A = false, B = true, C = false
+# 4) A = false, B = true, C = true
+# 5) A = true, B = false, C = false
+# 6) A = true, B = false, C = true
+# 7) A = true, B = true, C = false
+# 8) A = true, B = true, C = true
+
+
+############# Answer2 #############
+#   (A=false, B=true, C=true)  --> #4
+#   (A=true, B=true, C=true)   --> #8
+
+# ---------------------------------------------------------
+# 1) A = false, B = false, C = false
+#    Clause 1: A ∨ B = false ∨ false = false (fails here)
+#    => Not all satisfied
+
+# 2) A = false, B = false, C = true
+#    Clause 1: A ∨ B = false ∨ false = false (fails here)
+#    => Not all satisfied
+
+# 3) A = false, B = true, C = false
+#    Clause 1: false ∨ true = true
+#    Clause 2: false ∨ ¬(true) ∨ false = false ∨ false ∨ false = false (fails)
+#    => Not all satisfied
+
+# 4) A = false, B = true, C = true
+#    Clause 1: false ∨ true = true
+#    Clause 2: false ∨ ¬(true) ∨ true = false ∨ false ∨ true = true
+#    Clause 3: ¬(false) ∨ true = true ∨ true = true
+#    Clause 4: ¬(false) ∨ ¬(true) ∨ true = true ∨ false ∨ true = true
+#    => All four clauses satisfied
+
+# 5) A = true, B = false, C = false
+#    Clause 1: true ∨ false = true
+#    Clause 2: true ∨ ¬(false) ∨ false = true ∨ true ∨ false = true
+#    Clause 3: ¬(true) ∨ false = false ∨ false = false (fails)
+#    => Not all satisfied
+
+# 6) A = true, B = false, C = true
+#    Clause 1: true ∨ false = true
+#    Clause 2: true ∨ ¬(false) ∨ true = true ∨ true ∨ true = true
+#    Clause 3: ¬(true) ∨ false = false ∨ false = false (fails)
+#    => Not all satisfied
+
+# 7) A = true, B = true, C = false
+#    Clause 1: true ∨ true = true
+#    Clause 2: true ∨ ¬(true) ∨ false = true ∨ false ∨ false = true
+#    Clause 3: ¬(true) ∨ true = false ∨ true = true
+#    Clause 4: ¬(true) ∨ ¬(true) ∨ false = false ∨ false ∨ false = false (fails)
+#    => Not all satisfied
+
+# 8) A = true, B = true, C = true
+#    Clause 1: true ∨ true = true
+#    Clause 2: true ∨ ¬(true) ∨ true = true ∨ false ∨ true = true
+#    Clause 3: ¬(true) ∨ true = false ∨ true = true
+#    Clause 4: ¬(true) ∨ ¬(true) ∨ true = false ∨ false ∨ true = true
+#    => All four clauses satisfied
+
+# ---------------------------------------------------------
+
+
+############# Question3 #############
+# Consider the following four clauses in propositional logic, each involving the three variables A, B, and C:
+
+# 1. A ∨ B
+# 2. ¬A ∨ C
+# 3. B ∨ ¬C
+# 4. ¬A ∨ ¬B ∨ C
+
+# Out of the eight possible assignments for (A, B, C), which ones satisfy all four clauses?
+
+# Please check each of the following assignments:
+
+# 1) A = false, B = false, C = false
+# 2) A = false, B = false, C = true
+# 3) A = false, B = true,  C = false
+# 4) A = false, B = true,  C = true
+# 5) A = true,  B = false, C = false
+# 6) A = true,  B = false, C = true
+# 7) A = true,  B = true,  C = false
+# 8) A = true,  B = true,  C = true
+
+############# Answer3 #############
+#   (A = false, B = true, C = false)   -- #3
+#   (A = false, B = true, C = true)    -- #4
+#   (A = true,  B = true, C = true)    -- #8
+
+# ---------------------------------------------------------
+# 1) A = false, B = false, C = false
+#    Clause 1: A ∨ B = false ∨ false = false   (fails)
+#    => Not all satisfied
+
+# 2) A = false, B = false, C = true
+#    Clause 1: false ∨ false = false           (fails)
+#    => Not all satisfied
+
+# 3) A = false, B = true, C = false
+#    Clause 1: false ∨ true = true
+#    Clause 2: ¬(false) ∨ false = true ∨ false = true
+#    Clause 3: true ∨ ¬(false) = true ∨ true = true
+#    Clause 4: ¬(false) ∨ ¬(true) ∨ false = true ∨ false ∨ false = true
+#    => All clauses satisfied
+
+# 4) A = false, B = true, C = true
+#    Clause 1: false ∨ true = true
+#    Clause 2: true ∨ true = true
+#    Clause 3: true ∨ ¬(true) = true ∨ false = true
+#    Clause 4: true ∨ false ∨ true = true
+#    => All clauses satisfied
+
+# 5) A = true, B = false, C = false
+#    Clause 1: true ∨ false = true
+#    Clause 2: ¬(true) ∨ false = false ∨ false = false   (fails)
+#    => Not all satisfied
+
+# 6) A = true, B = false, C = true
+#    Clause 1: true ∨ false = true
+#    Clause 2: false ∨ true = true
+#    Clause 3: false ∨ ¬(true) = false ∨ false = false   (fails)
+#    => Not all satisfied
+
+# 7) A = true, B = true, C = false
+#    Clause 1: true ∨ true = true
+#    Clause 2: false ∨ false = false                      (fails)
+#    => Not all satisfied
+
+# 8) A = true, B = true, C = true
+#    Clause 1: true ∨ true = true
+#    Clause 2: false ∨ true = true
+#    Clause 3: true ∨ ¬(true) = true ∨ false = true
+#    Clause 4: false ∨ ¬(true) ∨ true = false ∨ false ∨ true = true
+#    => All clauses satisfied
+
+# ---------------------------------------------------------
