@@ -27,18 +27,23 @@
 
 ############# Question2 #############
 # Consider the following description of a search algorithm:
-
 # function XXXXXX-Search(problem) returns a solution, or failure
 #     initialize the frontier using the initial state of problem
-#     initialize a priority queue based on a heuristic function h(n)
+#     initialize a priority queue
+#     initialize the explored set to be empty
+#     set the cost of the initial state to 0
 #     loop do
 #         if the frontier is empty then return failure
-#         choose a node from the frontier with the lowest value of h(n)
+#         choose a node from the frontier with the lowest value of f(n)
 #         if the node contains a goal state then return the corresponding solution
-#         expand the chosen node, adding the resulting nodes to the frontier, only if not already in the frontier
-
+#         add the node to the explored set
+#         for each neighbor of the chosen node:
+#             calculate new_cost
+#             if the neighbor is not in the frontier or explored set, or if new_cost is lower than its previously recorded cost:
+#                 update the neighbor’s cost and add (or update) it in the frontier with priority f(neighbor) = new_cost + h(neighbor)
+#
 # Which search algorithm does this describe?
-
+#
 # Depth-First Search
 # A* Search
 # Greedy Best-First Search
@@ -46,11 +51,10 @@
 # Breadth-First Search
 
 ############# Answer2 #############
-# Algorithm: Greedy Best-First Search
+# Algorithm: A* Search
 # Why?:
-# The algorithm uses a priority queue to order nodes in the frontier based on the heuristic function h(n).
-# It does not consider the actual path cost g(n) from the start node, focusing only on the heuristic value.
-# This behavior matches the definition of Greedy Best-First Search, which prioritizes exploring nodes that "appear" closest to the goal according to the heuristic.
+# The algorithm maintains a priority queue and updates nodes based on a priority value that combines past cost and an estimated future cost.
+# This behavior matches A* Search, which balances exploration and cost efficiency to find an optimal path.
 
 
 ############# Question3 #############
@@ -85,7 +89,33 @@
 #       Even though the behavior of the code is similar to BFS, the algorithm itself does not specify “how to manage the frontier”, so this falls under the generic algorithm called "Graph Search
 
 
-############# Problem Class Implementation #############
+############# Question4 #############
+# Consider the following description of a search algorithm:
+# function XXXXXX-Search(problem) returns a solution, or failure
+#     for increasing values of a parameter:
+#         perform a modified version of another search algorithm
+#         if a solution is found then return it
+#     return failure
+#
+# Which search algorithm does this describe?
+#
+# Depth-First Search
+# Iterative Deepening Search
+# Greedy Best-First Search
+# Graph Search
+# Breadth-First Search
+
+
+############# Answer4 #############
+# Algorithm: Iterative Deepening Search
+# Why?:
+# The algorithm repeatedly executes another search method with a growing constraint, ensuring completeness
+# while managing resource usage effectively.
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# **** Problem Class Implementation ****
 class Problem:
     def __init__(self, initial_state, goal_state, graph, heuristics=None):
         self.initial_state = initial_state
@@ -464,3 +494,122 @@ print("Result:", result)
 #   Current node: 'G' (h(G) = 0)
 #   Goal check: True
 #   Return 'G'
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# | Algorithm                  | Frontier Data Structure    | Heuristic Usage         | Cost Usage | Explored Set               | Features / Search Order
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# | Graph Search               | Queue (deque)              | None                    | None       | Yes                        | A general graph search using an explored set to avoid revisiting nodes.
+# | Depth-First Search (DFS)   | Stack (list)               | None                    | None       | Yes                        | LIFO order; dives deep first, which can be efficient but may miss shallower solutions.
+# | Breadth-First Search (BFS) | Queue (deque)              | None                    | None       | Yes                        | FIFO order; explores level by level. Guarantees the shortest path (in terms of edges), but may use high memory.
+# | A* Search                  | Priority Queue (heapq)     | Yes (f(n)=g(n)+h(n))    | Yes        | Implicit via cost tracking | Combines actual path cost (g(n)) and heuristic (h(n)) to efficiently find an optimal solution, if the heuristic is admissible.
+# | Greedy Best-First Search   | Priority Queue (heapq)     | Yes (only h(n))         | None       | Yes                        | Chooses nodes based solely on the heuristic value. It is fast but does not guarantee the optimal solution.
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#
+# - Graph Search: Uses an explored set to prevent revisiting nodes.
+#   This is a generic method for exploring graphs.
+#
+# - Depth-First Search (DFS): Uses a "stack" to explore as deep as possible before backtracking.
+#   Pros: Lower memory usage; may quickly find deep solutions. (DFS only stores nodes along the current path, plus at most one adjacent node per level.)
+#   Cons: Risk of infinite loops; does not guarantee the shortest path. (e.g., in an infinite graph, it can overflow the stack.)
+#
+# - Breadth-First Search (BFS): Uses a "queue" to explore nodes level by level.
+#   Pros: Guarantees the shortest path (in terms of the number of edges).
+#   Cons: Can require significant memory. (It stores all nodes at the current depth level, so the number of stored nodes grows exponentially with depth.)
+#
+# - A* Search: Uses a "priority queue" combining actual cost (g(n)) and heuristic (h(n)) into f(n) = g(n) + h(n).
+#   Pros: Finds optimal solutions efficiently if the heuristic is well-designed.
+#   Cons: Requires a good heuristic; improper heuristic design can degrade performance.
+#
+# - Greedy Best-First Search: Uses a "priority queue" ordered solely by the heuristic value h(n).
+#   Pros: Often fast in reaching a goal.
+#   Cons: Does not guarantee the optimal solution; may be misled by local minima.
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+############# DFS Memory Transition (Stack-Based, LIFO) #############
+# Step 1 (Start at Root):
+#    A
+#    |
+#    v
+#    B
+
+# Stack: [A, B]
+
+# Step 2 (Go deeper):
+#    A
+#    |
+#    v
+#    B
+#    |
+#    v
+#    D
+
+# Stack: [A, B, D]  # Only the current path is stored
+
+# Step 3 (Backtrack and explore new branch):
+#    A
+#    |
+#    v
+#    B
+#    |
+#    v
+#    E
+
+# Stack: [A, B, E]  # D is removed, E is added
+
+# Step 4 (Go deeper again):
+#    A
+#    |
+#    v
+#    B
+#    |
+#    v
+#    E
+#    |
+#    v
+#    G
+
+# Stack: [A, B, E, G]  # Only this deep path is in memory
+
+# Final Memory Usage: **O(d) (depth of tree)**.
+
+
+############# BFS Memory Transition (Queue-Based, FIFO) #############
+# Step 1 (Start at Root):
+#    A
+
+# Queue: [A]  # Stores root
+
+# Step 2 (Expand Level 1):
+#      A
+#     / \
+#    B   C
+
+# Queue: [B, C]  # Stores all children of A
+
+# Step 3 (Expand Level 2):
+#      A
+#     / \
+#    B   C
+#   / \   \
+#  D   E   F
+
+# Queue: [D, E, F]  # Stores all children of B and C
+
+# Step 4 (Expand Level 3):
+#      A
+#     / \
+#    B   C
+#   / \   \
+#  D   E   F
+#         / \
+#        G   H
+
+# Queue: [G, H]  # Stores all children of F
+
+# Final Memory Usage: **O(b^d) (branching factor ^ depth)**.
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
