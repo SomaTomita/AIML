@@ -8,7 +8,7 @@
 # None of the above.
 
 ############# Answer #############
-# None of the above.
+"4)  None of the above."
 
 
 ##################################
@@ -232,3 +232,100 @@ def scenario3_infinite_loop_demo():
 
 
 scenario3_infinite_loop_demo()
+
+
+# ----------------------------------------------------------
+# ----------------------------------------------------------
+############# Question1 #############
+# Suppose you are running the Graph Search version of A*
+# on a pathfinding problem. You have an admissible heuristic
+# (it never overestimates the true cost to reach the goal).
+
+# Which of the following statements is guaranteed by using
+# an admissible heuristic in the Graph Search version of A*?
+
+# Group of answer choices:
+# 1) Consistency of the heuristic.
+# 2) Optimality of the first solution found.
+# 3) Termination whenever the set of states is finite.
+# 4) None of the above.
+
+############# Answer1 #############
+"2) Optimality of the first solution found."
+
+# 1) The Key Points:
+#    - We have a Graph Search version of A*.
+#    - The heuristic is admissible (never overestimates the true cost).
+#    - In Graph Search, we maintain a "closed set" to avoid re-expanding
+#      the same node endlessly.
+#
+# 2) Admissible Heuristic:
+#    - Admissibility means the heuristic value h(n) for any node n is
+#      never greater than the true minimal cost from n to the goal.
+#
+# 3) A* (Graph Search) Guarantees:
+#    - When using a properly implemented Graph Search A* with an admissible
+#      (and typically consistent) heuristic, the first time we pop the goal
+#      from the priority queue (based on f(n) = g(n) + h(n)), that solution
+#      is guaranteed to be optimal.
+#    - Specifically, if we do not reopen nodes in the closed set unless
+#      a strictly better g-value is found, the algorithm will find the
+#      optimal solution upon the first arrival at the goal.
+#
+# 4) Evaluating the Choices:
+#    - (1) Consistency is not automatically guaranteed by mere admissibility,
+#      so "1) Consistency of the heuristic" might not hold.
+#    - (2) Optimality of the first solution found: This is indeed guaranteed
+#      by A* (Graph Search) with an admissible heuristic (and correct management
+#      of closed/open sets). So this is true.
+#    - (3) Termination on finite states is typically true for Graph Search,
+#      but it's not the core property singled out by using an admissible
+#      heuristic. The question specifically focuses on the guaranteed outcome
+#      of the search's solution quality.
+#    - (4) None of the above would be incorrect, because (2) is indeed guaranteed.
+# ----------------------------------------------------------
+
+
+# ----------------------------------------------------------
+# ----------------------------------------------------------
+############# Question2 #############
+# Suppose you are running the Tree Search version of Greedy Best-First Search
+# (GBFS) on a planning problem. The heuristic is admissible (never overestimates)
+# but might not be consistent. Also, there is no mechanism to avoid revisiting
+# states (no "visited" check).
+
+# Which of the following statements is guaranteed by using
+# this admissible heuristic in the Tree Search version of GBFS?
+
+# Group of answer choices:
+# 1) Consistency of the heuristic.
+# 2) Optimality of the first solution found.
+# 3) Termination whenever the set of states is finite.
+# 4) None of the above.
+
+############# Answer2 #############
+"4) None of the above."
+
+# 1) Situation:
+#    - We use Tree Search with Greedy Best-First Search (GBFS).
+#    - The heuristic is admissible but may not be consistent.
+#    - No mechanism to avoid revisiting states (no visited set).
+#
+# 2) Analyzing Each Choice:
+#    - (1) Consistency of the heuristic:
+#      Admissibility alone does not imply consistency.
+#      Consistency requires h(n) <= cost(n, n') + h(n') for all edges (n -> n').
+#      Hence, we cannot claim consistency just because it's admissible.
+#
+#    - (2) Optimality of the first solution found:
+#      Greedy Best-First Search prioritizes nodes with the smallest heuristic value h(n).
+#      However, it ignores the actual cost so far, g(n). As a result, it might lead
+#      to a path that seems promising by the heuristic but is not truly optimal.
+#      Therefore, the first solution it finds is not guaranteed to be optimal.
+#
+#    - (3) Termination whenever the set of states is finite:
+#      Because we're using Tree Search and have no visited check, the same states
+#      can be re-generated infinitely (through different paths), potentially
+#      causing an infinite loop, even in a finite state space. Hence, we cannot
+#      guarantee termination.
+# ----------------------------------------------------------
