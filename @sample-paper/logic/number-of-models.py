@@ -93,3 +93,41 @@
 
 # Step 3: Compute the total number of valid models.
 # Total models = 4 (Case 1) + 8 (Case 2) = 12 models.
+
+
+# ----------------------------------------------------------
+# ############# Question 6 #############
+# In propositional logic, using four proposition symbols A, B, C, D,
+# how many models are there of the formula C ∨ A ∨ ¬C?
+# Or, to put it another way, how many models satisfy C ∨ A ∨ ¬C?
+
+# ############# Answer 6 #############
+# 16 models.
+
+# Step 1: Simplify the formula C ∨ A ∨ ¬C.
+# - The expression C ∨ ¬C is always true (tautology).
+# - The formula then simplifies to (True) ∨ A, which is still always true.
+
+# Step 2: Determine the number of satisfying models.
+# - Since the formula does not impose any restrictions, all possible truth assignments
+#   for A, B, C, and D satisfy it.
+# - Each of the four propositional symbols (A, B, C, D) can be either true or false.
+# - The total number of possible models is 2^4 = 16.
+
+
+# ----------------------------------------------------------
+# ############# Question 7 #############
+# In propositional logic, using four proposition symbols A, B, C, D,
+# how many models are there of the formula A ∧ B ∧ ¬A?
+# Or, to put it another way, how many models satisfy A ∧ B ∧ ¬A?
+
+# ############# Answer 7 #############
+# 0 models.
+
+# Step 1: Analyze the formula A ∧ B ∧ ¬A.
+# - The expression A ∧ ¬A is always false because A cannot be both true and false simultaneously.
+# - Since A ∧ ¬A is a contradiction, the entire formula A ∧ B ∧ ¬A is unsatisfiable.
+
+# Step 2: Determine the number of satisfying models.
+# - A contradiction means that there are no possible truth assignments that satisfy the formula.
+# - Therefore, the number of satisfying models is 0.
