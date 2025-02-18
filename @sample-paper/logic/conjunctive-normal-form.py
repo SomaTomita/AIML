@@ -165,6 +165,43 @@
 # 7) This final expression "Bv-Sv-L" is a single clause in Conjunctive Normal Form (CNF).
 
 
+# ############# Question4 #############
+# Consider the following logical statement:
+# If the battery is OK, and the screen is not cracked, then the phone works.
+# Suppose we have the following three proposition symbols:
+
+# B: The battery is OK.
+# S: The screen is cracked.
+# W: The phone works.
+
+# Write the logical statement in propositional logic using the three proposition symbols B, S, and W.
+# It should be written as a clause in conjunctive normal form.
+# Use a minus sign for negation (for example, -X means the negation of X).
+# Write disjunction (‘or’) using the letter ‘v’.
+# For example, the clause ¬B∨¬S would be written as -Bv-S.
+
+
+# ############# Answer4 #############
+"-BvSvW"
+
+# Explanation:
+# Step 1: Translate the given statement into logical form:
+#   "If the battery is OK AND the screen is NOT cracked, then the phone works."
+#   - "The battery is OK" -> B
+#   - "The screen is NOT cracked" -> NOT S (-S)
+#   - "The phone works" -> W
+#   So the statement is: (B AND -S) -> W
+#
+# Step 2: Recall that an implication P -> Q can be rewritten as ¬P ∨ Q.
+#   Here, P is (B AND -S), and Q is (W).
+#   So we get: ¬(B AND -S) ∨ W
+#
+# Step 3: Apply De Morgan’s Law to ¬(B AND -S):
+#   ¬(B AND -S) = (¬B OR S)
+#   Therefore, the whole expression becomes: (¬B OR S) OR W
+#   Which simplifies to: -BvSvW
+
+
 ""
 ############# De Morgan's Laws #############
 # De Morgan's Laws state:
