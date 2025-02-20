@@ -296,3 +296,69 @@ if __name__ == "__main__":
 #    => All clauses satisfied
 
 # ---------------------------------------------------------
+
+
+############# Question4 #############
+# Consider the following three sentences in propositional logic:
+
+# 1. A ∨ B
+# 2. A ∨ ¬B
+# 3. A ∨ B ∨ ¬C
+
+# Apply one step of the WalkSAT algorithm with the following assumptions:
+# - The probability p of making a random walk move is set to 0.
+# - The starting assignment is:
+A = False
+B = False
+C = True
+# - The algorithm chooses clause 3.
+
+# For each proposition symbol in clause 3, how many clauses would be satisfied in total if the symbol were flipped?
+# A: ??
+# B: ??
+# C: ??
+
+############# Answer4 #############
+# A: 3
+# B: 2
+# C: 2
+
+# ---------------------------------------------------------
+
+# Step 1: Evaluate clause 3 under the current assignment
+# Clause 3: A ∨ B ∨ ¬C
+# Substituting the values: False ∨ False ∨ ¬True
+#                         False ∨ False ∨ False
+#                         = False (Not satisfied)
+
+# Step 2: Consider flipping each symbol in clause 3 and count satisfied clauses
+# (1) Flip A (A becomes True)
+A = True
+# Clause 1: A ∨ B = True ∨ False = True (Satisfied)
+# Clause 2: A ∨ ¬B = True ∨ True = True (Satisfied)
+# Clause 3: A ∨ B ∨ ¬C = True ∨ False ∨ False = True (Satisfied)
+# Total satisfied clauses = 3
+
+# (2) Flip B (B becomes True)
+A = False  # Reset A to its original value
+B = True
+# Clause 1: A ∨ B = False ∨ True = True (Satisfied)
+# Clause 2: A ∨ ¬B = False ∨ False = False (Not satisfied)
+# Clause 3: A ∨ B ∨ ¬C = False ∨ True ∨ False = True (Satisfied)
+# Total satisfied clauses = 2
+
+# (3) Flip C (C becomes False)
+B = False  # Reset B to its original value
+C = False
+# Clause 1: A ∨ B = False ∨ False = False (Not satisfied)
+# Clause 2: A ∨ ¬B = False ∨ True = True (Satisfied)
+# Clause 3: A ∨ B ∨ ¬C = False ∨ False ∨ True = True (Satisfied)
+# Total satisfied clauses = 2
+
+# Step 3: Choose the best variable to flip
+# - Flipping A results in 3 satisfied clauses
+# - Flipping B results in 2 satisfied clauses
+# - Flipping C results in 2 satisfied clauses
+
+# Since flipping A satisfies the most clauses, it is the best choice.
+# ---------------------------------------------------------
