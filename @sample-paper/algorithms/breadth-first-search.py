@@ -73,14 +73,15 @@
 
 ############# Answer #############
 "Greedy Best-First Search"
+"A* Search"
 
 # - Greedy Best-First Search selects the next node to explore based only on the heuristic function h(n), meaning it always chooses the node that appears to be closest to the goal.
 # - It does not consider the cost to reach the node (g(n)), which can lead to suboptimal paths.
+# - A* Search: Uses a priority queue with f(n) = g(n) + h(n), which balances cost and heuristic.
 
 # Other Options Explanation:
 # - Breadth-First Search (BFS): Uses a FIFO queue.
 # - Depth-First Search (DFS): Uses a LIFO stack.
-# - A* Search: Uses a priority queue with f(n) = g(n) + h(n), which balances cost and heuristic.
-# - Graph Search / Tree Search: General search methodologies, not specific data structures.
+# - Graph Search / Tree Search: General search methodologies, not specific data structures. (They can use any frontier structure. (FIFO queue, LIFO stack, priority queue, etc.))
 # - Depth-First Depth-Limited Search: DFS with a maximum depth constraint.
 # - Iterative Deepening: Repeated applications of DFS with increasing depth limits.

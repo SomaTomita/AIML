@@ -1,5 +1,6 @@
 ############# Question #############
-# Suppose you are applying the Tree Search version of Greedy Best-First Search to a search problem. Using an admissible heuristic would guarantee:
+# Suppose you are applying the Tree Search version of Greedy Best-First Search to a search problem.
+# Using an admissible heuristic would guarantee:
 # Group of answer choices
 
 # Consistency of the heuristic.
