@@ -1,6 +1,7 @@
 ############# Question #############
 
-# In many practical applications of artificial intelligence, it is possible for people to be harmed or even killed by a deployed AI system. Depending on the application, there can also be financial losses or damage to property.
+# In many practical applications of artificial intelligence, it is possible for people to be harmed or even killed by a deployed AI system.
+# Depending on the application, there can also be financial losses or damage to property.
 # Suppose you are implementing a system to approve or deny small loans using a machine learning model.
 # It will be based on a supervised machine learning model, and trained on past approval decisions made by experienced staff.
 # The system will take the customer's credit history, postal code, and salary as input.
@@ -39,7 +40,8 @@
 
 # Importance:
 # This issue is highly significant because non-compliance with data protection laws (e.g., GDPR or CCPA) can lead to substantial fines, legal penalties, and reputational damage.
-# If customer data is breached or mishandled, it may result in identity theft, financial harm, and loss of trust. Non-compliance could prevent the deployment of the system entirely or force its suspension.
+# If customer data is breached or mishandled, it may result in identity theft, financial harm, and loss of trust.
+# Non-compliance could prevent the deployment of the system entirely or force its suspension.
 
 # Potential Solutions:
 # 1, Compliance with Data Protection Regulations: Ensure adherence to privacy laws by obtaining explicit customer consent, limiting data collection to necessary features, and anonymizing data where possible.
@@ -55,7 +57,8 @@
 ############# Answer3 #############
 # Ethical Issue: Accountability in Automated Decisions
 # A unique ethical issue in this scenario is the lack of accountability when loan approval decisions are fully automated.
-# If the system denies a loan incorrectly, who is responsible—the developers, the organization, or the machine itself? This issue becomes critical when customers face financial hardship due to unjust denials.
+# If the system denies a loan incorrectly, who is responsible—the developers, the organization, or the machine itself?
+# This issue becomes critical when customers face financial hardship due to unjust denials.
 
 # Importance:
 # This issue is crucial because the absence of accountability can erode trust in the system and lead to legal challenges.
