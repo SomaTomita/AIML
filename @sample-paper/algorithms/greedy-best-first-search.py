@@ -64,7 +64,7 @@
 # Summary:
 # 1. At each step, GBFS picks the node with the smallest straight-line distance to the goal (P).
 # 2. Harrogate’s neighbors (L, T) enter the frontier first.
-# 3. Thirsk (h=12) is chosen before Leeds (h=17), leading to York (h=8), then Pocklington (h=0).
+# 3. Thirsk (h=12) is chosen before Leeds (h=17), leading to York (h=8), then Pocklington (h=0, goal).
 # 4. Once Pocklington is expanded, its unvisited neighbor Wakefield (h=12) joins the frontier.
 
 
