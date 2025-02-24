@@ -394,3 +394,41 @@
 #    - There are 16 filters
 #    => Total weights = 28 × 16 = 448
 # ------------------------------------------------------------------------------
+
+
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+############# Question 7 #############
+
+# Suppose you have a convolutional neural network with an 8x8x3 input volume representing a colour image.
+# The first layer is a convolutional layer consisting of 10 filters that have a 3x3x3 receptive field.
+# Calculate the number of neurons and the total number of weights in the first layer.
+
+# Neurons:
+# Weights:
+# The output of the first layer is a volume. Give its dimensions.
+# Output volume dimensions:
+
+############# Answer 7 #############
+# ------------------------------------------------------------------------------
+# Explanation for Question 7
+# ------------------------------------------------------------------------------
+# 1. Calculate Output Volume Dimensions:
+#    Formula: O = (I - F) / S + 1
+#    - Input size (I)  = 8
+#    - Filter size (F) = 3
+#    - Stride (S)      = 1
+#    - No padding (valid convolution)
+#    Calculation: (8 - 3) / 1 + 1 = 6
+#    => Output volume dimensions = 6 × 6 × 10
+
+# 2. Calculate Number of Neurons:
+#    - Each neuron corresponds to one output element in the 6 × 6 × 10 volume
+#    - Total neurons = 6 × 6 × 10 = 360
+
+# 3. Calculate Number of Weights:
+#    - Each filter spans a 3 × 3 × 3 region = 27 weights per filter
+#    - Include 1 bias weight per filter → 27 + 1 = 28
+#    - There are 10 filters
+#    => Total weights = 28 × 10 = 280
+# ------------------------------------------------------------------------------
