@@ -153,3 +153,84 @@ plt.show()
 # 3. K-means is sensitive to outliers.
 #    - Since it calculates centroids based on the mean, an outlier (a point far away) can shift the centroid too much.
 #    - Solution: Consider using K-medoids, which are less sensitive to outliers.
+
+
+# ------------------------------------------------------------------------------
+############# Euclidean Distance && Manhattan Distance #############
+
+# 1. Euclidean Distance
+# Euclidean distance represents the "straight-line" distance between two points.
+# Mathematically, it is calculated using the Pythagorean theorem.
+
+# Example:
+# Given two points A(1,2) and B(5,6), the Euclidean distance is:
+# Euclidean Distance = sqrt((x2 - x1)^2 + (y2 - y1)^2)
+#                    = sqrt((5-1)^2 + (6-2)^2)
+#                    = sqrt(16 + 16) = sqrt(32) ≈ 5.66
+
+# It measures the shortest possible distance between two points.
+
+
+# 2. Manhattan Distance
+# Manhattan distance is the sum of the absolute differences of their Cartesian coordinates.
+# It is named after the "Manhattan grid layout," where movement is restricted to vertical and horizontal paths.
+
+# Example:
+# Using the same points A(1,2) and B(5,6),
+# Manhattan Distance = |x2 - x1| + |y2 - y1|
+#                    = |5-1| + |6-2|
+#                    = 4 + 4 = 8
+
+# It measures the travel distance when movement is limited to grid-like paths.
+
+
+# 3. Key Differences and Use Cases
+# - Euclidean Distance is used when measuring shortest paths (e.g., straight-line distance).
+# - Manhattan Distance is used when movement is grid-restricted (e.g., city streets, chess rook movement).
+
+# Visualization:
+# - When going from 🏠 home to 🏢 supermarket:
+#   - If you can fly, use Euclidean distance.
+#   - If you drive through streets, use Manhattan distance.
+
+
+# 4. Higher Dimensions
+# The concept remains the same in higher dimensions:
+# - Euclidean Distance → shortest path in n-dimensional space
+# - Manhattan Distance → sum of absolute differences along all axes
+
+# From the screenshots:
+# - Euclidean distance is always smaller than Manhattan distance.
+# - The difference increases as the points are further apart.
+
+
+# 5. Python Code
+import numpy as np
+
+# 2D Data
+a = np.array([1, 2])
+b = np.array([5, 6])
+
+# 10D Data
+c = np.array([1, 1, 1, 1, 1, 1, 1, 1, 100, 100])
+d = np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+
+# Euclidean Distance
+euclidean_ab = np.linalg.norm(a - b)
+euclidean_cd = np.linalg.norm(c - d)
+
+# Manhattan Distance
+manhattan_ab = np.linalg.norm(a - b, ord=1)
+manhattan_cd = np.linalg.norm(c - d, ord=1)
+
+print("Euclidean distance between a and b:", euclidean_ab)
+print("Manhattan distance between a and b:", manhattan_ab)
+print("Euclidean distance between c and d:", euclidean_cd)
+print("Manhattan distance between c and d:", manhattan_cd)
+
+# 6. Summary
+# - Euclidean Distance: Shortest (straight-line) distance
+# - Manhattan Distance: Distance following a grid
+# - Manhattan distance is always greater than Euclidean distance.
+# - The choice depends on whether diagonal movement is allowed.
+# ------------------------------------------------------------------------------
