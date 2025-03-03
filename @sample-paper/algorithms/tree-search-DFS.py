@@ -11,7 +11,7 @@
 
 ############# Answer #############
 # Time complexity: O(b^m)
-# Space complexity: # O(m)
+# Space complexity: O(b*m)
 
 # ----------------------------------------------------------
 #     A
@@ -53,15 +53,113 @@
 # SPACE COMPLEXITY ANALYSIS
 # -------------------------------
 # In Tree Search DFS:
-# - DFS keeps track of only the current path in the recursion stack.
-# - The deepest recursion depth is at most m.
-# - Hence, the space complexity depends only on m.
-
-# This results in a space complexity of O(m).
+# - DFS keeps track of the current path in the recursion stack (O(m))
+# - At each level, we need to store information about b children
+# - This means we need O(b) space at each of the m levels
+# - Hence, the total space complexity is O(b*m)
 
 # Example calculation:
-# If m = 3:
-# O(3)
+# If b = 2 and m = 3:
+# O(2*3) = O(6)
+
+
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.children = []
+
+
+def tree_search_dfs(node, target):
+    # Base case: The current node matches the target
+    if node.value == target:
+        return True
+    # For each child node, perform a depth-first search
+    for child in node.children:
+        # Continue the search from the child node
+        if tree_search_dfs(child, target):
+            return True
+    # If the target is not found
+    return False
+
+
+def example():  # Example
+    root = Node("A")
+    b_node = Node("B")
+    c_node = Node("C")
+    d_node = Node("D")
+    e_node = Node("E")
+    f_node = Node("F")
+
+    root.children = [b_node, c_node]
+    b_node.children = [d_node, e_node]
+    c_node.children = [f_node]
+
+    # Let's search for "E". Here's the execution flow:
+    # 1. Start at root "A"
+    #    - Check if A == "E" (False)
+    #    - Enter loop for A's children [B, C]
+
+    # 2. First recursive call: node = B
+    #    - Check if B == "E" (False)
+    #    - Enter loop for B's children [D, E]
+
+    # 3. Second recursive call: node = D
+    #    - Check if D == "E" (False)
+    #    - Enter loop for D's children [] (empty)
+    #    - Return False (backtrack to B)
+
+    # 4. Continue B's children loop: next child E
+    #    - Check if E == "E" (True!)
+    #    - Return True (propagates up through all calls)
+
+    # Note: Because E is found, we never explore:
+    # - The rest of B's children (none left anyway)
+    # - Node C and its child F
+
+    result = tree_search_dfs(root, "E")
+    print(f"Target 'E' found: {result}")  # True
+
+    # Let's search for "X". Here's the execution flow:
+    # 1. Start at root "A"
+    #    - Check if A == "X" (False)
+    #    - Enter loop for A's children [B, C]
+
+    # 2. First recursive call: node = B
+    #    - Check if B == "X" (False)
+    #    - Enter loop for B's children [D, E]
+
+    # 3. Second recursive call: node = D
+    #    - Check if D == "X" (False)
+    #    - Enter loop for D's children [] (empty)
+    #    - Return False (backtrack to B)
+
+    # 4. Continue with B's next child: E
+    #    - Check if E == "X" (False)
+    #    - Enter loop for E's children [] (empty)
+    #    - Return False (backtrack to B)
+
+    # 5. B's children loop complete, return False
+    #    - Backtrack to A, continue with next child C
+
+    # 6. Process node C
+    #    - Check if C == "X" (False)
+    #    - Enter loop for C's children [F]
+
+    # 7. Process node F
+    #    - Check if F == "X" (False)
+    #    - Enter loop for F's children [] (empty)
+    #    - Return False
+
+    # 8. All nodes checked, target not found
+    #    - Return False
+
+    result = tree_search_dfs(root, "X")
+    print(f"Target 'X' found: {result}")  # False
+
+
+if __name__ == "__main__":
+    example()
+
 
 # ----------------------------------------------------------
 # EXAMPLE 2
@@ -76,7 +174,7 @@
 #   G
 
 # - Time Complexity: O(2^4) = O(16)
-# - Space Complexity: O(4) = O(m)
+# - Space Complexity: O(2*4) = O(8)
 # ----------------------------------------------------------
 
 

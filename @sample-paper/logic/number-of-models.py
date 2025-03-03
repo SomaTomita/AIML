@@ -34,7 +34,7 @@
 
 # Since A and C are free variables, they each have 2 possible truth values:
 # - A can be true or false (2 choices).
-# - C can be true or false (2 choices).s
+# - C can be true or false (2 choices).
 
 # Total models = 2 (choices for A) × 2 (choices for C) = 4
 
@@ -54,7 +54,7 @@
 # - A ∨ C means at least one of A or C must be true.
 
 # Step 2: Determine the possible values for A and C that satisfy A ∨ C.
-# - (A = True, C = Ture, False) → Valid
+# - (A = True, C = True, False) → Valid
 # - (A = False, C = True) → Valid
 # - (A = False, C = False) → Invalid (violates A ∨ C)
 
@@ -80,16 +80,17 @@
 # - C and E remain unrestricted and can take any value (True or False).
 
 # Step 2: Count the valid assignments.
+# - D is fixed as True (1 choice)
 # - A can be True or False (2 choices).
 # - If A = True → B must be False (1 forced choice).
 # - If A = False → B can be either True or False (2 choices).
 # - C and E are unrestricted (2 choices each).
 
-# Case 1: A = True → B = False, C and E unrestricted.
-# Models: 1 (forced B) × 2 (C) × 2 (E) = 4 models.
+# Case 1: A = True → B = False, D = True (fixed), C and E unrestricted.
+# Models: 1 (forced B) × 1 (fixed D) × 2 (C) × 2 (E) = 4 models.
 
-# Case 2: A = False → B unrestricted, C and E unrestricted.
-# Models: 2 (B) × 2 (C) × 2 (E) = 8 models.
+# Case 2: A = False → B unrestricted, D = True (fixed), C and E unrestricted.
+# Models: 2 (B) × 1 (fixed D) × 2 (C) × 2 (E) = 8 models.
 
 # Step 3: Compute the total number of valid models.
 # Total models = 4 (Case 1) + 8 (Case 2) = 12 models.
@@ -131,3 +132,29 @@
 # Step 2: Determine the number of satisfying models.
 # - A contradiction means that there are no possible truth assignments that satisfy the formula.
 # - Therefore, the number of satisfying models is 0.
+
+
+# ----------------------------------------------------------
+# ############# Question 9 #############
+# In propositional logic, suppose there are five proposition symbols A, B, C, D, E.
+# How many models are there?
+
+# ############# Answer 9 #############
+# 32 models.
+
+# Explanation:
+# 1. In propositional logic, each proposition symbol can be either True (1) or False (0)
+# 2. For each symbol, we have 2 possibilities
+# 3. With 5 symbols, we use the multiplication principle:
+#    - Total number of models = 2^5 = 2 * 2 * 2 * 2 * 2 = 32
+#
+# For example, some possible models are:
+# - A=T, B=T, C=T, D=T, E=T
+# - A=T, B=T, C=T, D=T, E=F
+# - A=T, B=T, C=T, D=F, E=T
+# ...and so on for all 32 combinations
+#
+# This can also be understood as:
+# - Each model represents a unique assignment of truth values
+# - With n proposition symbols, we always have 2^n possible models
+# - In this case, n = 5, so we have 2^5 = 32 models
